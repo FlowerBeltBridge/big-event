@@ -60,4 +60,14 @@ public class UserController {
         User user = userService.findByUserName(username);
         return Result.success(user);
     }
+
+    /*更新
+    * @RequestBody 接收前端传的Json数据转换为User对象
+    * */
+    @PutMapping("/update")
+    public Result update(@RequestBody User user){
+        userService.update(user);
+        return Result.success();
+    }
+
 }
