@@ -63,9 +63,10 @@ public class UserController {
 
     /*更新
     * @RequestBody 接收前端传的Json数据转换为User对象
+    * @Validated 对前端传的Json数据进行校验
     * */
     @PutMapping("/update")
-    public Result update(@RequestBody User user){
+    public Result update(@RequestBody @Validated User user){
         userService.update(user);
         return Result.success();
     }
