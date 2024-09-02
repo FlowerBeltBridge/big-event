@@ -7,6 +7,7 @@ import org.example.pojo.User;
 import org.example.service.UserService;
 import org.example.utils.JwtUtil;
 import org.example.utils.Md5Util;
+import org.example.utils.ThreadLocalUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
@@ -52,8 +53,9 @@ public class UserController {
         return Result.error("密码错误");
     }
     @GetMapping("/userInfo")
-    public Result<User> userInfo(@RequestHeader(name = "Authorization") String token){
-        Map<String, Object> map = JwtUtil.parseToken(token);
+    public Result<User> userInfo(/*@RequestHeader(name = "Authorization") String token*/){
+        /*Map<String, Object> map = JwtUtil.parseToken(token);*/
+        Map<String, Object> map = ThreadLocalUtil.get();
         String username = (String) map.get("username");
         User user = userService.findByUserName(username);
         return Result.success(user);
